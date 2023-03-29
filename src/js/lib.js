@@ -64,7 +64,8 @@ function getDir(dir) {
 
   if (location.pathname.includes('/examples/vanilla/') === false) {
     return (
-      `https://cdn.jsdelivr.net/npm/ideogram@${version}/dist/data/${dir}`
+      `http://localhost:8080/ideogram/dist/data/${dir}`
+      // `https://cdn.jsdelivr.net/npm/ideogram@${version}/dist/data/${dir}`
     );
   }
 

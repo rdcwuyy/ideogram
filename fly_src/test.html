@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>Ideogram Test</title>
+    </head>
+    <body>
+        <div id="ideo-container"></div>
+        <script type="text/javascript" src="/ideogram/dist/js/ideogram.min.js"></script>
+        <script type="text/javascript">
+            const MAPK_genes = [
+                                {'name': 'aop', 'chr': '2L', 'start': 2156484, 'stop': 2178754},
+                                {'name': 'Sos', 'chr': '2L', 'start': 13813816, 'stop': 13819824},
+                                {'name': 'Raf', 'chr': 'X', 'start': 2295466, 'stop': 2343870},
+                                {'name': 'test', 'chr': 'X', 'start': 12295466, 'stop': 12343870},
+                                {'name': 'pnt', 'chr': '3R', 'start': 23290231, 'stop': 23346167},
+                                {'name': 'Ras85D', 'chr': '3R', 'start': 9510561, 'stop': 9513067},
+                                {'name': 'Egfr', 'chr': '2R', 'start': 21522420, 'stop': 21559977},
+                                {'name': 'aos', 'chr': '3L', 'start': 16470386, 'stop': 16483650}, 
+                                {'name': 'drk', 'chr': '2R', 'start': 13495222, 'stop': 13502841}, 
+                                {'name': 'Dsor1', 'chr': 'X', 'start': 9247342, 'stop': 9250037}, 
+                                {'name': 'sty', 'chr': '3L', 'start': 3401153, 'stop': 3424935}, 
+                                {'name': 'kek1', 'chr': '2L', 'start': 12817000, 'stop': 12822787}, 
+                                {'name': 'ksr', 'chr': '3R', 'start': 5478390, 'stop': 5483906}, 
+                                {'name': 'cic', 'chr': '3R', 'start': 20252770, 'stop': 20303942}
+                            ]
+
+            const ideogram = new Ideogram({
+                organism: 'drosophila-melanogaster',
+                container: '#ideo-container',
+                resolution: 550, // proxy for number of cytobands
+                chrHeight: 275,
+                chrMargin: 3,
+                annotationHeight: 4,
+                annotations: MAPK_genes
+            });
+        </script>
+    </body>
+</html>

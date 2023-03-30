@@ -125,19 +125,67 @@ function writeTrackAnnots(chrAnnot, ideo) {
 
   shapes = getShapes(annotHeight);
 
-  chrAnnot.append('g')
-    .attr('id', function(d) {return d.domId;})
-    .attr('class', 'annot')
-    .attr('transform', function(d) {
-      var y = ideo.config.chrWidth + (d.trackIndex * annotHeight * 2);
-      return 'translate(' + d.px + ',' + y + ')';
-    })
-    .append('path')
-    .attr('d', function(d) {return determineShape(d, shapes);})
-    .attr('fill', function(d) {return d.color;})
-    .on('mouseover', function(event, d) {ideo.showAnnotTooltip(d, this);})
-    .on('mouseout', function() {ideo.startHideAnnotTooltipTimeout();})
-    .on('click', function(event, d) {ideo.onClickAnnot(d);});
+  /**
+     * 30/03/2023 rdcwuyy updated for adding gene name into the annotation
+     */
+  var g = chrAnnot.append('g').attr('id', function (d) {
+    return d.id;
+  }).attr('class', 'annot').attr('transform', function (d) {
+    var y = ideo.config.chrWidth + d.trackIndex * annotHeight * 2;
+    // console.error(d);
+    return 'translate(' + d.px + ',' + y + ')';
+  });
+  // 30/03/2023 rdcwuyy updated for adding gene name into the annotation
+  var lastData = null;
+  var lastTx = 22;
+  g.append('text').text(function (d) {
+    return d.name;
+  }).attr('transform', function (d) {
+    // console.error(lastData);
+    var tx = 22;
+    if (lastData && lastData.chr == d.chr 
+      && Math.abs(lastData.px - d.px) < 6) {
+        tx = lastTx + lastData.name.length * 4 + 5;
+    }
+    lastData =  d;
+    lastTx = tx;
+    // console.error(d);
+    return 'rotate(-90)translate(' + tx + ',6)';
+  }).on('mouseover', function (d) {
+    ideo.showAnnotTooltip(d, this);
+  }).on('mouseout', function () {
+    ideo.startHideAnnotTooltipTimeout();
+  });
+
+  g.append('path').attr('d', function (d) {
+    return determineShape(d, shapes);
+  }).attr('fill', function (d) {
+    return d.color;
+  }).on('mouseover', function (event, d) {
+    ideo.showAnnotTooltip(d, this);
+  }).on('mouseout', function () {
+    ideo.startHideAnnotTooltipTimeout();
+  });
+  /**
+   * Original begin
+   */
+
+  // chrAnnot.append('g')
+  //   .attr('id', function(d) {return d.domId;})
+  //   .attr('class', 'annot')
+  //   .attr('transform', function(d) {
+  //     var y = ideo.config.chrWidth + (d.trackIndex * annotHeight * 2);
+  //     return 'translate(' + d.px + ',' + y + ')';
+  //   })
+  //   .append('path')
+  //   .attr('d', function(d) {return determineShape(d, shapes);})
+  //   .attr('fill', function(d) {return d.color;})
+  //   .on('mouseover', function(event, d) {ideo.showAnnotTooltip(d, this);})
+  //   .on('mouseout', function() {ideo.startHideAnnotTooltipTimeout();})
+  //   .on('click', function(event, d) {ideo.onClickAnnot(d);});
+  /**
+   * original end
+   */  
 }
 
 /**

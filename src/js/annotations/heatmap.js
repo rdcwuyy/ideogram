@@ -22,7 +22,8 @@ function writeCanvases(chr, chrLeft, ideoHeight, ideo) {
     contextArray = [],
     numAnnotTracks = ideo.config.numAnnotTracks;
 
-  var marginHack = 7; // TODO: Make this dynamic
+  // 30/03/2023 updated by rdcwuyy original : marginHack = 7  
+  var marginHack = 30; // TODO: Make this dynamic
 
   // Create a canvas for each annotation track on this chromosome
   for (j = 0; j < numAnnotTracks; j++) {
